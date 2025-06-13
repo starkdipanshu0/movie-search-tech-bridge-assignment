@@ -15,8 +15,14 @@ type MovieContextType = {
   movies: Movie[];
   isLoading: boolean;
   error: string;
-  fetchMovies: (title: string, year?: string, type?: string) => Promise<void>;
-  page?: number;
+  fetchMovies: (title: string, year?: string, type?: string, page?:number) => Promise<void>;
+  query: {
+    title: string;
+    year?: string;
+    type?: string;
+    page?: number;
+  }
+ 
 };
 
 const MovieContext = createContext<MovieContextType | undefined>(undefined);
@@ -25,12 +31,19 @@ export const MovieProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [movies, setMovies] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [page, setPage] = useState(1);
+  const [query, setQuery] = useState({
+    title: "batman",
+    year: "",
+    type: "",
+    page: 1
+  });
+  
 
   const fetchMovies = async (title: string, year?: string, type?: string, page?:number) => {
     try {
       setIsLoading(true);
-      const response = await fetch(`${apiUrl}&s=${title}&y=${year}&type=${type}&page=${page || 1}`);
+      setQuery({ title, year: year || "", type: type || "", page: page || 1 });
+      const response = await fetch(`${apiUrl}&s=${query.title}&y=${query.year}&type=${query.type}&page=${query.page || 1}`);
       const data = await response.json();
 
       if (data.Response === "True") {
@@ -48,7 +61,7 @@ export const MovieProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   };
 
   return (
-    <MovieContext.Provider value={{ movies, isLoading, error, fetchMovies, page }}>
+    <MovieContext.Provider value={{ movies, isLoading, error, fetchMovies , query }}>
       {children}
     </MovieContext.Provider>
   );

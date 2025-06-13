@@ -5,9 +5,9 @@ import { useMovies } from "@/_context/MovieContext";
 import { useState, useEffect } from "react";
 
 function Home() {
-  const { fetchMovies, movies } = useMovies();
+  const { fetchMovies, movies, query } = useMovies();
   const [currentPage, setCurrentPage] = useState(1);
-  const [query, setQuery] = useState({ title: "batman", year: "", type: "" });
+  
 
   useEffect(() => {
     fetchMovies(query.title, query.year, query.type, currentPage);
@@ -27,6 +27,7 @@ function Home() {
       <div className="mt-6 flex justify-center">
         <Pagination
           currentPage={currentPage}
+          
           totalResults={movies.length >= 10 ? 100 : movies.length}
           onPageChange={(page) => setCurrentPage(page)}
         />
