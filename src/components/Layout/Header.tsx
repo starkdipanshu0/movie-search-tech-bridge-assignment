@@ -1,9 +1,9 @@
 import { NavLink } from "react-router-dom";
-import { FaSearch } from "react-icons/fa";
-import { useState } from "react";
+
+
 
 const Header = () => {
-  const [searchText, setSearchText] = useState("");
+
 
   return (
     <header className="bg-white shadow sticky top-0 z-50">
