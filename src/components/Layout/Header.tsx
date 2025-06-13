@@ -1,44 +1,20 @@
- import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { FaSearch } from "react-icons/fa";
+import { useState } from "react";
+
 const Header = () => {
-  
+  const [searchText, setSearchText] = useState("");
 
-  
   return (
-    <header className="bg-gradient-to-r from-purple-600 via-indigo-500 to-blue-300 text-white shadow-md sticky top-0 z-10">
-      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <div className="text-xl font-bold">
-          <NavLink to="/" className="hover:text-yellow-300">
-            MovieZone 🎬
-          </NavLink>
-        </div>
-        <nav className="flex space-x-6 text-lg">
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              isActive ? "text-yellow-300 font-semibold" : "hover:text-yellow-300"
-            }
-          >
-            Home
-          </NavLink>
-
-          
-          <NavLink
-            to="/about"
-            className={({ isActive }) =>
-              isActive ? "text-yellow-300 font-semibold" : "hover:text-yellow-300"
-            }
-          >
-            About
-          </NavLink>
-          <NavLink
-            to="/contact"
-            className={({ isActive }) =>
-              isActive ? "text-yellow-300 font-semibold" : "hover:text-yellow-300"
-            }
-          >
-            Contact
-          </NavLink>
-        </nav>
+    <header className="bg-white shadow sticky top-0 z-50">
+      <div className="container mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-4">
+        {/* Logo */}
+        <NavLink
+          to="/"
+          className="text-3xl font-bold text-gray-800 hover:text-blue-600 transition-colors"
+        >
+          MovieSearch
+        </NavLink>
       </div>
     </header>
   );
